@@ -1,0 +1,42 @@
+.resume-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+  box-sizing: border-box;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #0070d1;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.download-button:hover {
+  background-color: #0082f0;
+}
+
+.pdf-viewer-wrapper {
+  width: 100%;
+  max-width: 900px; /* Adjust as needed */
+  flex-grow: 1; /* Makes the wrapper take up remaining vertical space */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}

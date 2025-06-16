@@ -1,0 +1,285 @@
+/*
+*  PS4 HOME SCREEN STYLES
+*/
+
+.home-screen-container {
+  padding: 30px 50px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Ensures padding doesn't add to the height */
+}
+
+/* --- TOP NAVIGATION --- */
+.top-nav {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Prevents this from shrinking */
+}
+
+.nav-item {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-item:hover, .nav-item.active {
+  color: white;
+  transform: scale(1.1);
+}
+
+/* --- HORIZONTAL CONTENT ROW (THE "GAMES") --- */
+.content-row-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px; /* Give it a fixed height */
+  overflow: hidden; /* CRUCIAL: Clips the off-screen cards */
+  flex-shrink: 0;
+}
+
+.content-row {
+  display: flex; /* Makes items go side-by-side */
+  position: absolute; /* Allows us to animate its position freely */
+  top: 20px;
+  left: 0;
+  gap: 20px; /* Space between cards */
+}
+
+.content-card {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  flex-shrink: 0; /* CRUCIAL: Prevents cards from squishing */
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: 2px solid transparent; /* Prepare for active state border */
+  transition: border-color 0.3s ease;
+}
+
+.content-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px; /* Slightly smaller radius than the parent */
+}
+
+/* This is the label that appears below the active card */
+.card-title {
+  position: absolute;
+  bottom: -35px; /* Position it below the card */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.card-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* 
+    THE FIX: This new gradient is stronger. 
+    It starts darker (95% black) and covers the bottom 40% of the card
+    before it even begins to fade out.
+  */
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 0.95) 40%, 
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding: 40px 10px 15px 10px; /* Adjust padding for the new gradient */
+}
+
+/* --- DETAIL PANE (BELOW THE CARDS) --- */
+.detail-pane {
+  margin-top: 30px;
+  padding-left: 5px; /* Align with the centered card's position */
+  max-width: 600px;
+}
+.detail-pane h2 {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+}
+.detail-pane p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+/* ... keep all the existing styles for .content-row, .content-card, etc. ... */
+
+.home-screen-container {
+  /* Remove padding from here */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* --- NEW MAIN CONTENT NAV --- */
+.main-content-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-group-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-right: 20px;
+}
+
+.main-nav-item {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 5px 0;
+  border-bottom: 3px solid transparent;
+}
+
+.main-nav-item:hover {
+  color: white;
+}
+
+.main-nav-item.active {
+  color: white;
+  border-bottom-color: white;
+}
+.content-card {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative; /* Keep this for the overlay */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+
+  /* NEW: Use flexbox to easily position the overlay at the bottom */
+  display: flex;
+  justify-content: flex-end; /* Pushes content to the bottom */
+  flex-direction: column;
+  overflow: hidden; /* Important: keeps the image corners rounded */
+    border: 3px solid transparent;
+  transition: all 0.3s ease; /* Use 'all' to transition the border/shadow */
+
+}
+.content-card[style*="scale(1.1)"] {
+  border-color: #0099ff;
+  box-shadow: 0 0 25px rgba(0, 153, 255, 0.7);
+}
+
+.content-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* --- THIS IS THE FIX --- */
+  object-fit: contain; /* Scales the image to fit while preserving aspect ratio */
+  /* ----------------------- */
+
+  z-index: 1;
+  /* Adding a subtle drop shadow to the image itself can look nice */
+  filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.5));
+}
+
+/* NEW: The container for our text (THIS IS THE KEY PART) */
+.card-overlay {
+  position: relative;
+  z-index: 2; /* Sits on top of the image */
+  width: 100%;
+  /* Fading gradient from transparent to black for readability */
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  padding: 30px 10px 10px 10px;
+}
+
+/* UPDATED: The text style itself */
+.card-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+
+  /* Prevent long text from breaking layout */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+/* --- Action Buttons Styling --- */
+
+.action-buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px; /* Space between buttons */
+}
+
+.action-buttons a {
+  display: inline-flex; /* Allows flex properties to align icon and text */
+  align-items: center;
+  gap: 10px;
+  
+  background-color: #0070d1; /* A nice, prominent blue */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.action-buttons a:hover {
+  background-color: #0082f0; /* Slightly lighter on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+  box-shadow: 0 4px 15px rgba(0, 112, 209, 0.4);
+}
+/* --- Navigation Arrow Hints Styling --- */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  color: #fff;
+  z-index: 10;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+  
+  /* This makes the icons visible but NOT clickable, so they don't interfere with anything */
+  pointer-events: none; 
+}
+
+.nav-arrow.left {
+  left: 20px;
+}
+
+.nav-arrow.right {
+  right: 20px;
+}
