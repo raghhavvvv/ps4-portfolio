@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProfilePage.css'; // We will create this next
 import { Link } from 'react-router-dom';
-import { FaUser, FaInfoCircle, FaGamepad, FaArrowLeft, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaUser, FaInfoCircle, FaArrowLeft, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
 

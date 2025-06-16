@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import ResumeViewer from './ResumeViewer';
 import { playSound } from '../utils/audio';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState, useEffect, useMemo } from 'react';
 
 
 
@@ -52,8 +53,9 @@ const HomeScreen = () => {
   }, []);
   
   // This logic determines which array of items to display
-  const currentItems = data[activeSection.toLowerCase()] || [];
-
+  const currentItems = useMemo(() => {
+    return data[activeSection.toLowerCase()] || [];
+  }, [data, activeSection]);
   // Reset activeIndex when the section changes
   useEffect(() => {
     setActiveIndex(0);
