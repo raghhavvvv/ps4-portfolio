@@ -6,12 +6,10 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
-      "config": { 
-        "installCommand": "npm install", 
-        "buildCommand": "npm run build",
-        "outputDirectory": "build"
+      "config": {
+        "distDir": "client/build"
       }
     }
   ],
@@ -21,24 +19,11 @@
       "dest": "server/server.js"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/client/static/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/client/images/$1"
-    },
-    {
-      "src": "/sounds/(.*)",
-      "dest": "/client/sounds/$1"
-    },
-    {
-      "src": "/resume.pdf",
-      "dest": "/client/resume.pdf"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/client/index.html"
+      "handler": {
+        "type": "filesystem"
+      },
+      "dest": "client/$1"
     }
   ]
 }
