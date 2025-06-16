@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './HomeScreen.css'; // We will update this file too
 import Header from './Header'; // Import the new Header
 import { motion } from 'framer-motion';
 import ResumeViewer from './ResumeViewer';
 import { playSound } from '../utils/audio';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import React, { useState, useEffect, useMemo } from 'react';
 
 
 
