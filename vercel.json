@@ -8,7 +8,11 @@
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "installCommand": "npm install", "buildCommand": "npm run build" }
+      "config": { 
+        "installCommand": "npm install", 
+        "buildCommand": "npm run build",
+        "outputDirectory": "build"
+      }
     }
   ],
   "routes": [
@@ -17,8 +21,24 @@
       "dest": "server/server.js"
     },
     {
+      "src": "/static/(.*)",
+      "dest": "/client/static/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/client/images/$1"
+    },
+    {
+      "src": "/sounds/(.*)",
+      "dest": "/client/sounds/$1"
+    },
+    {
+      "src": "/resume.pdf",
+      "dest": "/client/resume.pdf"
+    },
+    {
       "src": "/(.*)",
-      "dest": "client/$1"
+      "dest": "/client/index.html"
     }
   ]
 }
