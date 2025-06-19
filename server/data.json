@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "_id": "proj1",
+      "title": "Synthetic Face Detection using rPPG",
+      "description": "ML Algorithm that diffrentiates between a real person or an AI generated person by calculating heart rate remotely.",
+      "technologies": ["Python", "OpenCV", "SVM"],
+      "imageUrl": "/images/project1.png",
+      "liveUrl": null,
+      "repoUrl": "https://github.com/your-username/your-repo"
+    },
+    {
+      "_id": "proj2",
+      "title": "ShopSphere",
+      "description": "A full-featured e-commerce platform for handcrafted goods. Includes user authentication, a shopping cart, and Stripe integration for payments.",
+      "technologies": ["React", "Redux", "Node.js", "Stripe API"],
+      "imageUrl": "/images/project2.jpg",
+      "liveUrl": "https://example.com",
+      "repoUrl": "https://github.com/your-username/shopsphere"
+    },
+    {
+      "_id": "proj3",
+      "title": "DataViz Dashboard",
+      "description": "An interactive dashboard for visualizing real-time financial data using Chart.js. Features WebSocket updates and customizable graphs.",
+      "technologies": ["Vue.js", "Chart.js", "WebSocket", "Tailwind CSS"],
+      "imageUrl": "/images/project3.jpg",
+      "liveUrl": "https://example.com",
+      "repoUrl": "https://github.com/your-username/dataviz-dashboard"
+    }
+  ],
+  "experiences": [
+    {
+      "_id": "exp1",
+      "title": "Intern",
+      "company": "Frost & Sullivan",
+      "description": "Worked on an in-house AI platform called MetaBrain, that gave our clients a more in depth analysis of their industry",
+      "imageUrl": "/images/frost-sullivan.svg"
+    },
+    {
+      "_id": "exp2",
+      "title": "Intern",
+      "company": "IIDST",
+      "description": "Worked on an in-house AI platform that gave clients a more in depth analysis of their industry.",
+      "imageUrl": "/images/iidst.jpeg"
+    }
+  ],
+  "education": [
+    {
+      "_id": "edu1",
+      "title": "Bachelor of Technology in Information Technology",
+      "school": "Dr. A.P.J. Abdul Kalam Technical University",
+      "description": "Graduated with honors. Focused on software development, algorithms, and database management.",
+      "imageUrl": "/images/aktu.png"
+    }
+  ]
+}

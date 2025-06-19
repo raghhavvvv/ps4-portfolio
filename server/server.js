@@ -1,44 +1,27 @@
-require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
-
-const allowedOrigins = ['https://ps4-portfolio.vercel.app'];
-
-const Project = require('./models/Project');
-const Experience = require('./models/Experience');
-const Education = require('./models/Education');
-
 const app = express();
-app.use(cors());
+
+// Import the local JSON data directly
+const portfolioData = require('./data.json');
+
+// Use a permissive CORS policy
+app.use(cors({ origin: '*' }));
+
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected...'))
-  .catch(err => console.error(err));
+// --- API ROUTES ---
 
-  app.get("/api/test", (req, res) => {
-  console.log("Test route hit successfully!");
-  res.status(200).json({ message: "Hello from the serverless function!" });
+// Test route (good to keep for debugging)
+app.get("/api/test", (req, res) => {
+  res.status(200).json({ message: "Hello from the test route!" });
 });
 
-app.get('/api/portfolio-data', async (req, res) => {
-  try {
-    const [projects, experiences, education] = await Promise.all([
-      Project.find(),
-      Experience.find(),
-      Education.find()
-    ]);
-    
-    // Send all data back in a structured object
-    res.json({ projects, experiences, education });
-
-  } catch (err) {
-    console.error('❌ ERROR in /api/portfolio-data route:', err);
-    res.status(500).json({ message: 'Error fetching data' });
-  }
+// Main data route now simply sends the imported JSON object
+app.get('/api/portfolio-data', (req, res) => {
+  // No async, no try/catch, no database connection needed!
+  res.status(200).json(portfolioData);
 });
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`🖥️ Server running on port ${PORT}`));
+// Vercel exports the Express app
+module.exports = app;
