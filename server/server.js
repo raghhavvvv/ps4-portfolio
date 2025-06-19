@@ -18,6 +18,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => console.log('✅ MongoDB Connected...'))
   .catch(err => console.error(err));
 
+  app.get("/api/test", (req, res) => {
+  console.log("Test route hit successfully!");
+  res.status(200).json({ message: "Hello from the serverless function!" });
+});
+
 app.get('/api/portfolio-data', async (req, res) => {
   try {
     const [projects, experiences, education] = await Promise.all([
