@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './HomeScreen.css';
 import { motion, AnimatePresence } from 'framer-motion';
+import portfolioData from '../data.json';
 
 // Import the new hook
 import useWindowSize from '../hooks/useWindowSize';
@@ -43,7 +44,7 @@ const ContentCard = ({ item, isActive, label, onClick }) => (
 );
 
 const HomeScreen = () => {
-  const [data, setData] = useState({ projects: [], experiences: [], education: [] });
+  const data = portfolioData;
   const [activeSection, setActiveSection] = useState('Projects');
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -52,16 +53,6 @@ const HomeScreen = () => {
   const isMobile = width <= 768;
   // ------------------------------------
 
-  useEffect(() => {
-    const apiUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://your-project-name.vercel.app/api/portfolio-data' // IMPORTANT: Remember to change this to your Vercel URL
-      : '/api/portfolio-data';
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error("Failed to fetch data:", err));
-  }, []);
-  
   const currentItems = useMemo(() => {
     return data[activeSection.toLowerCase()] || [];
   }, [data, activeSection]);
