@@ -27,6 +27,11 @@
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
 }
+.header-right-section {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* This will now control the space between the icon block and the clock */
+}
 
 .clock {
   font-size: 1.2rem;
@@ -43,4 +48,31 @@
 }
 .profile-link:hover {
   transform: scale(1.05); /* Adds a subtle hover effect */
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 10px 15px;
+  }
+  .profile-section {
+    font-size: 0; 
+  }
+  .profile-icon {
+    font-size: 1.6rem;
+  }
+
+  /* CRUCIAL FIX: Hide ONLY the system icons, not the clock */
+  .system-icons {
+    display: none;
+  }
+
+  /* Adjust the right-side container and clock for mobile */
+  .header-right-section {
+    gap: 15px;
+  }
+  .clock {
+    min-width: 75px;
+    text-align: right;
+    font-size: 1rem;
+  }
 }

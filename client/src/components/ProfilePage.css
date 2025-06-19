@@ -132,3 +132,70 @@
   color: #00aaff; /* A bright blue on hover */
   transform: scale(1.2) translateY(-2px); /* Makes the icon pop */
 }
+@media (max-width: 768px) {
+
+  /* 1. Stack the main containers vertically */
+  .profile-page-container {
+    flex-direction: column;
+    height: auto; /* Allow the page to grow in height */
+    min-height: 100vh; /* Ensure it at least fills the screen */
+  }
+
+  /* 2. Adjust the sidebar for a top-bar layout */
+  .profile-sidebar {
+    flex: 0 0 auto; /* Remove fixed width, let it size to content */
+    border-right: none; /* Remove the side border */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Add a bottom border */
+    padding: 20px 15px; /* Reduce padding for mobile */
+  }
+
+  /* Make the profile picture smaller */
+  .profile-picture-placeholder {
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+  }
+  
+  /* Adjust profile text sizes */
+  .profile-info h2 {
+    font-size: 1.8rem;
+  }
+  .profile-info .tagline {
+    font-size: 0.9rem;
+  }
+
+  /* Make nav items smaller and horizontal for a cleaner look */
+  .profile-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .profile-nav li {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+  
+  /* 3. Reposition the "Back to Home" button */
+  .back-button {
+    margin-top: 20px; /* Remove auto margin and add a standard space */
+    background-color: rgba(255, 255, 255, 0.05); /* Give it a subtle background */
+  }
+
+  /* 4. Adjust the main content area */
+  .profile-content {
+    padding: 25px 15px; /* Reduce padding */
+  }
+
+  .content-panel h3 {
+    font-size: 1.5rem;
+  }
+
+  .content-panel p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .socials-container {
+    justify-content: center; /* Center the social icons */
+  }
+}

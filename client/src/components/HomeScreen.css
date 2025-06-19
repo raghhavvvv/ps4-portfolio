@@ -283,3 +283,70 @@
 .nav-arrow.right {
   right: 20px;
 }
+
+@media (max-width: 768px) {
+  /* Allow the main container to scroll */
+  .home-screen-container {
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .content-row-wrapper {
+    overflow: visible;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .content-row {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    gap: 0; /* Let the detail pane's margin handle spacing */
+  }
+
+  .content-card {
+    cursor: pointer;
+    width: 55vw; /* Reduce card width to feel less cramped */
+    max-width: 300px; /* Add a max-width for larger phones */
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 40px; 
+  }
+
+  .detail-pane {
+    width: 55vw; /* Match the new card width */
+    max-width: 300px; /* Match the new card max-width */
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .detail-pane h2 {
+    font-size: 1.6rem; /* Slightly smaller title */
+  }
+
+  .detail-pane p {
+    font-size: 0.95rem; /* Slightly smaller paragraph text */
+    line-height: 1.6;
+  }
+
+  .detail-pane .action-buttons {
+    justify-content: center;
+    flex-direction: column; /* Stack buttons on very small screens if needed */
+    gap: 15px; /* Adjust gap */
+  }
+
+  .detail-pane .action-buttons a {
+    font-size: 1rem; /* Make button text slightly smaller */
+    padding: 10px 20px;
+  }
+  .nav-arrow { display: none; }
+  
+  .main-content-nav {
+    padding: 10px 15px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .main-content-nav::-webkit-scrollbar { display: none; }
+}

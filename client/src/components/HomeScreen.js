@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import './HomeScreen.css'; // We will update this file too
-import Header from './Header'; // Import the new Header
-import { motion } from 'framer-motion';
+import './HomeScreen.css';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// Import the new hook
+import useWindowSize from '../hooks/useWindowSize';
+
+// Import other components and icons
+import Header from './Header';
 import ResumeViewer from './ResumeViewer';
-import { playSound } from '../utils/audio';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { playSound } from '../utils/audio';
 
 
-
-// This is our main content navigator now
 const MainContentNav = ({ activeSection, onSectionClick }) => {
-  const sections = ['Projects', 'Experiences', 'Education', 'Resume']; // Add more here as needed
-
+  const sections = ['Projects', 'Experiences', 'Education', 'Resume'];
   return (
     <div className="main-content-nav">
-      <div className="nav-group-label">PORTFOLIO</div> {/* Like "GAMES & MEDIA" */}
+      <div className="nav-group-label">PORTFOLIO</div>
       {sections.map(section => (
-        <div
-          key={section}
-          className={`main-nav-item ${activeSection === section ? 'active' : ''}`}
-          onClick={() => onSectionClick(section)}
-        >
+        <div key={section} className={`main-nav-item ${activeSection === section ? 'active' : ''}`} onClick={() => onSectionClick(section)}>
           {section}
         </div>
       ))}
@@ -28,14 +26,19 @@ const MainContentNav = ({ activeSection, onSectionClick }) => {
   );
 };
 
-const ContentCard = ({ item, isActive }) => (
+const ContentCard = ({ item, isActive, label, onClick }) => (
   <motion.div
     className="content-card"
+    onClick={onClick}
     animate={{ scale: isActive ? 1.1 : 1 }}
     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
   >
     <img src={item.imageUrl} alt={item.title} />
-    {isActive && <h4 className="card-title">{item.title}</h4>}
+    {isActive && (
+      <div className="card-overlay">
+        <h4 className="card-title">{label}</h4>
+      </div>
+    )}
   </motion.div>
 );
 
@@ -44,131 +47,131 @@ const HomeScreen = () => {
   const [activeSection, setActiveSection] = useState('Projects');
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // --- KEY CHANGE: Use our new hook ---
+  const { width } = useWindowSize();
+  const isMobile = width <= 768;
+  // ------------------------------------
+
   useEffect(() => {
-    fetch('/api/portfolio-data')
+    const apiUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://your-project-name.vercel.app/api/portfolio-data' // IMPORTANT: Remember to change this to your Vercel URL
+      : '/api/portfolio-data';
+    fetch(apiUrl)
       .then(res => res.json())
       .then(setData)
       .catch(err => console.error("Failed to fetch data:", err));
   }, []);
   
-  // This logic determines which array of items to display
   const currentItems = useMemo(() => {
     return data[activeSection.toLowerCase()] || [];
   }, [data, activeSection]);
-  // Reset activeIndex when the section changes
+
   useEffect(() => {
     setActiveIndex(0);
   }, [activeSection]);
 
- // In your HomeScreen component, find the useEffect that handles keydown events
-
   useEffect(() => {
-    // --- The Completed Function ---
     const handleKeyDown = (e) => {
-      // If there are no items to navigate, do nothing
-      if (!currentItems.length) return;
-
-      // Handle right arrow key press
-      if (e.key === 'ArrowRight') {
-        // Play the navigation sound first
-        playSound('/sounds/navigate.mp3'); 
-        // Then, update the state to move to the next item
-        setActiveIndex(prev => (prev + 1) % currentItems.length);
-      } 
-      // Handle left arrow key press
-      else if (e.key === 'ArrowLeft') {
-        // Play the navigation sound first
+      if (!currentItems.length || isMobile) return; // Disable keyboard nav on mobile
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         playSound('/sounds/navigate.mp3');
-        // Then, update the state to move to the previous item
-        setActiveIndex(prev => (prev - 1 + currentItems.length) % currentItems.length);
+        if (e.key === 'ArrowRight') {
+          setActiveIndex(prev => (prev + 1) % currentItems.length);
+        } else if (e.key === 'ArrowLeft') {
+          setActiveIndex(prev => (prev - 1 + currentItems.length) % currentItems.length);
+        }
       }
     };
-
-    // Add the event listener when the component mounts
     window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentItems, isMobile]); // Re-run if it becomes mobile
 
-    // Clean up the event listener when the component unmounts to prevent memory leaks
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [currentItems]); // The effect re-runs if the list of items changes
-
-   return (
+  return (
     <div className="home-screen-container">
       <Header />
       <MainContentNav activeSection={activeSection} onSectionClick={setActiveSection} />
       
       {activeSection !== 'Resume' ? (
-        <>
-          <div className="content-row-wrapper">
-                      {currentItems.length > 1 && (
-              <>
-                <div className="nav-arrow left">
-                  <FaChevronLeft />
-                </div>
-                <div className="nav-arrow right">
-                  <FaChevronRight />
-                </div>
-              </>
-            )}
-            {/* --------------------------- */}
-            
-            <motion.div
-              className="content-row"
-              key={activeSection}
-              initial={{ opacity: 0 }}
-              animate={{ x: `calc(50% - ${activeIndex * 220}px - 110px)`, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            >
-              {currentItems.map((item, index) => (
+        <div className="content-row-wrapper">
+          {/* Show arrows only on desktop and if there's content to scroll */}
+          {!isMobile && currentItems.length > 1 && (
+            <>
+              <div className="nav-arrow left"><FaChevronLeft /></div>
+              <div className="nav-arrow right"><FaChevronRight /></div>
+            </>
+          )}
+          
+          <motion.div
+            className="content-row"
+            key={activeSection}
+            initial={{ opacity: 0 }}
+            // --- KEY CHANGE: Conditional animation ---
+            animate={{ 
+              x: isMobile ? 0 : `calc(50% - ${activeIndex * 220}px - 110px)`, 
+              opacity: 1 
+            }}
+            // ------------------------------------------
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            {currentItems.map((item, index) => (
+              <React.Fragment key={item._id}>
                 <ContentCard 
-                  key={item._id} 
                   item={item} 
                   isActive={index === activeIndex} 
+                  onClick={() => setActiveIndex(index)}
                   label={
                     activeSection === 'Education' ? item.school :
                     activeSection === 'Experiences' ? item.company :
                     item.title
                   } 
                 />
-              ))}
-            </motion.div>
-          </div>
-          
-          {currentItems[activeIndex] && (
-          <motion.div 
-            key={currentItems[activeIndex]._id}
-            className="detail-pane"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2>{currentItems[activeIndex].title}</h2>
-            <p>{currentItems[activeIndex].description}</p>
-            
-            {/* --- THIS IS THE NEW CODE --- */}
-            <div className="action-buttons">
-              {/* Conditionally render the "View Live" button */}
-              {currentItems[activeIndex].liveUrl && (
-                <a href={currentItems[activeIndex].liveUrl} target="_blank" rel="noopener noreferrer">
-                  <FaExternalLinkAlt /> View Live
-                </a>
-              )}
-              {/* Conditionally render the "View Code" button */}
-              {currentItems[activeIndex].repoUrl && (
-                <a href={currentItems[activeIndex].repoUrl} target="_blank" rel="noopener noreferrer">
-                  <FaGithub /> View Code
-                </a>
-              )}
-            </div>
-            {/* --------------------------- */}
-            
+                
+                {/* --- KEY CHANGE: Render mobile details conditionally --- */}
+                {isMobile && (
+                  <AnimatePresence>
+                    {index === activeIndex && (
+                      <motion.div
+                        className="detail-pane" // We can reuse this class now
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 20, marginBottom: 20 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0, marginBottom: 0 }}
+                      >
+                        <h2>{item.title}</h2>
+                        <p>{item.description}</p>
+                        <div className="action-buttons">
+                          {item.liveUrl && <a href={item.liveUrl} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> View Live</a>}
+                          {item.repoUrl && <a href={item.repoUrl} target="_blank" rel="noopener noreferrer"><FaGithub /> View Code</a>}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </React.Fragment>
+            ))}
           </motion.div>
-        )}
-        </>
+        </div>
       ) : (
-        // If the section IS 'Resume', show our new component
         <ResumeViewer />
+      )}
+
+      {/* --- KEY CHANGE: Render desktop details conditionally --- */}
+      {!isMobile && currentItems.length > 0 && currentItems[activeIndex] && (
+        <div className="detail-pane-desktop">
+          <motion.div 
+             key={currentItems[activeIndex]._id}
+             className="detail-pane"
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 0.2 }}
+           >
+             <h2>{currentItems[activeIndex].title}</h2>
+             <p>{currentItems[activeIndex].description}</p>
+             <div className="action-buttons">
+               {currentItems[activeIndex].liveUrl && <a href={currentItems[activeIndex].liveUrl} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> View Live</a>}
+               {currentItems[activeIndex].repoUrl && <a href={currentItems[activeIndex].repoUrl} target="_blank" rel="noopener noreferrer"><FaGithub /> View Code</a>}
+             </div>
+           </motion.div>
+        </div>
       )}
     </div>
   );

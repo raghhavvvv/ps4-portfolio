@@ -13,24 +13,33 @@ const Clock = () => {
   return <div className="clock">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>;
 };
 
+// In client/src/components/Header.js
+
 const Header = () => {
   return (
     <div className="header-container">
       <div className="profile-section">
-         <Link to="/profile" className="profile-link">
+        <Link to="/profile" className="profile-link">
           <FaUser className="profile-icon" />
           <span>Raghav Pant</span>
         </Link>
       </div>
-      <div className="system-icons">
-        <FaRegEnvelope />
-        <FaSmile />
-        <FaHeadphones />
-        <FaTrophy />
-        <FaCog />
-        <FaPowerOff />
+
+      {/* --- THIS IS THE NEW STRUCTURE --- */}
+      <div className="header-right-section">
+        {/* The icons are now in their own div */}
+        <div className="system-icons">
+          <FaRegEnvelope />
+          <FaSmile />
+          <FaHeadphones />
+          <FaTrophy />
+          <FaCog />
+          <FaPowerOff />
+        </div>
         <Clock />
       </div>
+      {/* --------------------------------- */}
+
     </div>
   );
 };
