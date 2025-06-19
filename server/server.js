@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+const allowedOrigins = ['https://ps4-portfolio.vercel.app'];
+
 const Project = require('./models/Project');
 const Experience = require('./models/Experience');
 const Education = require('./models/Education');
