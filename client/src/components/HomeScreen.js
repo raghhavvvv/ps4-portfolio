@@ -2,11 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './HomeScreen.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import portfolioData from '../data.json';
-
-// Import the new hook
 import useWindowSize from '../hooks/useWindowSize';
 
-// Import other components and icons
 import Header from './Header';
 import ResumeViewer from './ResumeViewer';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -35,11 +32,6 @@ const ContentCard = ({ item, isActive, label, onClick }) => (
     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
   >
     <img src={item.imageUrl} alt={item.title} />
-    {isActive && (
-      <div className="card-overlay">
-        <h4 className="card-title">{label}</h4>
-      </div>
-    )}
   </motion.div>
 );
 
@@ -48,10 +40,10 @@ const HomeScreen = () => {
   const [activeSection, setActiveSection] = useState('Projects');
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // --- KEY CHANGE: Use our new hook ---
+
   const { width } = useWindowSize();
   const isMobile = width <= 768;
-  // ------------------------------------
+
 
   const currentItems = useMemo(() => {
     return data[activeSection.toLowerCase()] || [];
@@ -96,7 +88,6 @@ const HomeScreen = () => {
             className="content-row"
             key={activeSection}
             initial={{ opacity: 0 }}
-            // --- KEY CHANGE: Conditional animation ---
             animate={{ 
               x: isMobile ? 0 : `calc(50% - ${activeIndex * 220}px - 110px)`, 
               opacity: 1 
@@ -110,11 +101,6 @@ const HomeScreen = () => {
                   item={item} 
                   isActive={index === activeIndex} 
                   onClick={() => setActiveIndex(index)}
-                  label={
-                    activeSection === 'Education' ? item.school :
-                    activeSection === 'Experiences' ? item.company :
-                    item.title
-                  } 
                 />
                 
                 {/* --- KEY CHANGE: Render mobile details conditionally --- */}

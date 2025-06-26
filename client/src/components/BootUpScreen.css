@@ -11,11 +11,9 @@
 }
 
 .boot-screen {
-  /* Add cursor: pointer to indicate it's clickable */
   cursor: pointer; 
 }
 
-/* New style for the prompt text */
 .start-prompt {
   position: absolute;
   bottom: 20%;

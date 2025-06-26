@@ -4,13 +4,10 @@ import { ReactComponent as PsLogo } from '../assets/ps-logo.svg'; // Use this im
 import bootSound from '../assets/ps4-boot.mp3';
 
 const BootUpScreen = ({ onFinished }) => {
-  // New state to wait for the user's click
   const [userInteracted, setUserInteracted] = useState(false);
   const [show, setShow] = useState(true);
 
-  // This effect will now run only AFTER the user has clicked
   useEffect(() => {
-    // If the user hasn't interacted yet, do nothing.
     if (!userInteracted) {
       return;
     }
@@ -21,18 +18,15 @@ const BootUpScreen = ({ onFinished }) => {
     const fadeOutTimer = setTimeout(() => {
       setShow(false);
       setTimeout(onFinished, 500); 
-    }, 4000); // You can shorten this time if you like
-
-    // Cleanup function to prevent memory leaks
+    }, 4000); 
     return () => clearTimeout(fadeOutTimer);
-  }, [userInteracted, onFinished]); // Rerun this effect when userInteracted changes
+  }, [userInteracted, onFinished]); 
 
   const handleStart = () => {
     setUserInteracted(true);
   };
 
   return (
-    // Add an onClick handler to the main container
     <div 
       className={`boot-screen ${!show ? 'fade-out' : ''}`} 
       onClick={!userInteracted ? handleStart : undefined}

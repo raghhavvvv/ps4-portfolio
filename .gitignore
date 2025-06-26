@@ -25,3 +25,16 @@ yarn-error.log*
 .vscode/
 .idea/
 .DS_Store
+
+# --- Terraform ---
+
+# Ignore Terraform state files (VERY IMPORTANT FOR SECURITY)
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform generated folder and plans
+.terraform/
+*.tfplan
+
+# Ignore Terraform crash logs
+crash.log

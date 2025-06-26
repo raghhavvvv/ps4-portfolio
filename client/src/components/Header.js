@@ -3,7 +3,6 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import { FaUser, FaRegEnvelope, FaSmile, FaHeadphones, FaTrophy, FaCog, FaPowerOff } from 'react-icons/fa';
 
-// A simple clock component
 const Clock = () => {
   const [time, setTime] = React.useState(new Date());
   React.useEffect(() => {
@@ -13,7 +12,6 @@ const Clock = () => {
   return <div className="clock">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>;
 };
 
-// In client/src/components/Header.js
 
 const Header = () => {
   return (
@@ -25,9 +23,9 @@ const Header = () => {
         </Link>
       </div>
 
-      {/* --- THIS IS THE NEW STRUCTURE --- */}
+      {}
       <div className="header-right-section">
-        {/* The icons are now in their own div */}
+        {}
         <div className="system-icons">
           <FaRegEnvelope />
           <FaSmile />

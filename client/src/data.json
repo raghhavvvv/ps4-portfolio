@@ -5,24 +5,24 @@
       "title": "Synthetic Face Detection using rPPG",
       "description": "ML Algorithm that diffrentiates between a real person or an AI generated person by calculating heart rate remotely.",
       "technologies": ["Python", "OpenCV", "SVM"],
-      "imageUrl": "/images/project1.png",
+      "imageUrl": "/images/project.jpg",
       "liveUrl": null,
-      "repoUrl": "https://github.com/your-username/your-repo"
+      "repoUrl": "https://github.com/raghhavvvv/heart_rate_estimation_rppg"
     },
     {
       "_id": "proj2",
-      "title": "ShopSphere",
-      "description": "A full-featured e-commerce platform for handcrafted goods. Includes user authentication, a shopping cart, and Stripe integration for payments.",
-      "technologies": ["React", "Redux", "Node.js", "Stripe API"],
+      "title": "Web Server With Cache",
+      "description": " proxy web server which utilizes multithreaded and caching to serve web pages using HTTP GET requests. Built using C ",
+      "technologies": ["C", "C Lang", "Operating Systems"],
       "imageUrl": "/images/project2.jpg",
       "liveUrl": "https://example.com",
-      "repoUrl": "https://github.com/your-username/shopsphere"
+      "repoUrl": "https://github.com/raghhavvvv/web_server_with_cache"
     },
     {
       "_id": "proj3",
-      "title": "DataViz Dashboard",
-      "description": "An interactive dashboard for visualizing real-time financial data using Chart.js. Features WebSocket updates and customizable graphs.",
-      "technologies": ["Vue.js", "Chart.js", "WebSocket", "Tailwind CSS"],
+      "title": "Wireless Sound Control",
+      "description": "This repo contains code for a wireless sound control of windows OS project i made in 2021, using python and machine learning tools",
+      "technologies": ["Machine Learning", "Tensorflow"],
       "imageUrl": "/images/project3.jpg",
       "liveUrl": "https://example.com",
       "repoUrl": "https://github.com/your-username/dataviz-dashboard"
@@ -33,14 +33,14 @@
       "_id": "exp1",
       "title": "Intern",
       "company": "Frost & Sullivan",
-      "description": "Worked on an in-house AI platform called MetaBrain, that gave our clients a more in depth analysis of their industry",
+      "description": "Worked on an in-house AI platform called MetaBrain, that served as a custom AI model for individual clients' industries, and catered custom built solutions for them",
       "imageUrl": "/images/frost-sullivan.svg"
     },
     {
       "_id": "exp2",
       "title": "Intern",
       "company": "IIDST",
-      "description": "Worked on an in-house AI platform that gave clients a more in depth analysis of their industry.",
+      "description": "Rebuilt and restructured the organization's backend and database architecture, achieving a 30% improvement in data retrieval speed while ensuring high-quality data accuracy for decision-making processes. Designed and deployed interactive dashboards using Power BI, enabling upper management to make data-driven decisions with real-time insights. Conducted in-depth cleaning, transformation, and analysis of financial data, ensuring consistency and accuracy across reports. Developed automated processes for data validation and anomaly detection, reducing manual errors by 25%.",
       "imageUrl": "/images/iidst.jpeg"
     }
   ],

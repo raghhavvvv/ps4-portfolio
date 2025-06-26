@@ -1,0 +1,17 @@
+# Git and Node dependencies
+.git
+.gitignore
+node_modules
+client/node_modules
+server/node_modules
+
+# Build artifacts
+client/build
+
+# Env files
+.env
+server/.env
+
+# Docker files
+Dockerfile
+.dockerignore
