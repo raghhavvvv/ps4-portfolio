@@ -5,7 +5,7 @@
       "title": "Synthetic Face Detection using rPPG",
       "description": "ML Algorithm that diffrentiates between a real person or an AI generated person by calculating heart rate remotely.",
       "technologies": ["Python", "OpenCV", "SVM"],
-      "imageUrl": "/images/project.jpg",
+      "imageUrl": "/images/project.jpg",  
       "liveUrl": null,
       "repoUrl": "https://github.com/raghhavvvv/heart_rate_estimation_rppg"
     },
@@ -23,7 +23,7 @@
       "title": "Wireless Sound Control",
       "description": "This repo contains code for a wireless sound control of windows OS project i made in 2021, using python and machine learning tools",
       "technologies": ["Machine Learning", "Tensorflow"],
-      "imageUrl": "/images/project3.jpg",
+      "imageUrl": "/images/project3.png",
       "liveUrl": "https://example.com",
       "repoUrl": "https://github.com/your-username/dataviz-dashboard"
     }
@@ -47,10 +47,18 @@
   "education": [
     {
       "_id": "edu1",
-      "title": "Bachelor of Technology in Information Technology",
+      "title": "Dr. A.P.J. Abdul Kalam Technical University",
       "school": "Dr. A.P.J. Abdul Kalam Technical University",
       "description": "Graduated with honors. Focused on software development, algorithms, and database management.",
-      "imageUrl": "/images/aktu.png"
+      "imageUrl": "/images/aktu.jpg"
+    },
+    {
+    "_id": "edu2",
+    "title": "Amity International School Mayoor Vihar",
+    "school": "Online Learning Platform",
+    "description": "Senior Secondary (12th Grade)",
+    "imageUrl": "/images/amity.png"
     }
+    
   ]
 }
