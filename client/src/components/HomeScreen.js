@@ -87,7 +87,7 @@ const HomeScreen = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
     
-  }, [currentItems, activeSection, sections, isMobile, showTutorial]);
+  }, [currentItems, activeSection, isMobile, showTutorial]);
   return (
     <div className="home-screen-container">
     {showTutorial && !isMobile && <TutorialModal onClose={() => setShowTutorial(false)} />}      
