@@ -3,15 +3,14 @@ import './HomeScreen.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import portfolioData from '../data.json';
 import useWindowSize from '../hooks/useWindowSize';
-
+import TutorialModal from './TutorialModal';
 import Header from './Header';
 import ResumeViewer from './ResumeViewer';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { playSound } from '../utils/audio';
 
 
-const MainContentNav = ({ activeSection, onSectionClick }) => {
-  const sections = ['Projects', 'Experiences', 'Education', 'Resume'];
+const MainContentNav = ({ activeSection, onSectionClick, sections }) => {
   return (
     <div className="main-content-nav">
       <div className="nav-group-label">PORTFOLIO</div>
@@ -39,8 +38,8 @@ const HomeScreen = () => {
   const data = portfolioData;
   const [activeSection, setActiveSection] = useState('Projects');
   const [activeIndex, setActiveIndex] = useState(0);
-
-
+  const sections = ['Projects', 'Experiences', 'Education', 'Resume'];
+  const [showTutorial, setShowTutorial] = useState(true);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
 
@@ -53,27 +52,48 @@ const HomeScreen = () => {
     setActiveIndex(0);
   }, [activeSection]);
 
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!currentItems.length || isMobile) return; // Disable keyboard nav on mobile
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      if (showTutorial) return;
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        playSound('/sounds/navigate.mp3'); // Play navigation sound
+
+        const currentSectionIndex = sections.indexOf(activeSection);
+        let nextSectionIndex;
+
+        if (e.key === 'ArrowDown') {
+          nextSectionIndex = (currentSectionIndex + 1) % sections.length;
+        } else { // ArrowUp
+          nextSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+        }
+        
+        setActiveSection(sections[nextSectionIndex]);
+      }
+
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        if (!currentItems.length || activeSection === 'Resume') return;
+        
         playSound('/sounds/navigate.mp3');
+        
         if (e.key === 'ArrowRight') {
           setActiveIndex(prev => (prev + 1) % currentItems.length);
-        } else if (e.key === 'ArrowLeft') {
+        } else { // ArrowLeft
           setActiveIndex(prev => (prev - 1 + currentItems.length) % currentItems.length);
         }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentItems, isMobile]); // Re-run if it becomes mobile
-
+    
+  }, [currentItems, activeSection, sections, isMobile, showTutorial]);
   return (
     <div className="home-screen-container">
+    {showTutorial && !isMobile && <TutorialModal onClose={() => setShowTutorial(false)} />}      
       <Header />
-      <MainContentNav activeSection={activeSection} onSectionClick={setActiveSection} />
-      
+      <MainContentNav activeSection={activeSection} onSectionClick={setActiveSection} sections={sections} />
+            
       {activeSection !== 'Resume' ? (
         <div className="content-row-wrapper">
           {/* Show arrows only on desktop and if there's content to scroll */}

@@ -1,0 +1,94 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Translucent background with a frosted glass effect */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: rgba(10, 22, 49, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 30px 40px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.instructions {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.instruction-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.2rem;
+}
+
+.keys {
+  background: rgba(0,0,0,0.3);
+  padding: 8px 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background-color: #0070d1;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  background-color: #0082f0;
+  transform: scale(1.05);
+}
+
+.ps-button-x {
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  font-weight: bold;
+  font-size: 1rem;
+}
