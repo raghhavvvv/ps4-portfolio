@@ -8,6 +8,7 @@ import Header from './Header';
 import ResumeViewer from './ResumeViewer';
 import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { playSound } from '../utils/audio';
+const sections = ['Projects', 'Experiences', 'Education', 'Resume'];
 
 
 const MainContentNav = ({ activeSection, onSectionClick, sections }) => {
@@ -38,7 +39,6 @@ const HomeScreen = () => {
   const data = portfolioData;
   const [activeSection, setActiveSection] = useState('Projects');
   const [activeIndex, setActiveIndex] = useState(0);
-  const sections = ['Projects', 'Experiences', 'Education', 'Resume'];
   const [showTutorial, setShowTutorial] = useState(true);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
