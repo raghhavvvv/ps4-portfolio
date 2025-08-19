@@ -26,6 +26,33 @@
       "imageUrl": "/images/project3.png",
       "liveUrl": "https://example.com",
       "repoUrl": "https://github.com/your-username/dataviz-dashboard"
+    },
+    {
+      "_id": "proj4",
+      "title": "Git Savvy",
+      "description": "A local-first, AI-powered command-line tool that suggests fixes for incorrect Git commands.",
+      "technologies": ["Python", "RAG Models", "Shell", "Ollama", "ChromaDB"],
+      "imageUrl": "/images/git.png",
+      "liveUrl": "https://git-savvy.vercel.app",
+      "repoUrl": "https://github.com/raghhavvvv/git-savvy"
+    },
+    {
+      "_id": "proj5",
+      "title": "Chess Dot Com",
+      "description": "An online chess game which allows you to play multiplayer chess games with anyone in the world, live and real time.",
+      "technologies": ["WebSockets", "JavaScript", "HTML", "CSS", "TypeScript"],
+      "imageUrl": "/images/chess.webp",
+      "liveUrl": "https://chess-dot-com-olive.vercel.app",
+      "repoUrl": "https://github.com/raghhavvvv/chess-dot-com"
+    },
+    {
+      "_id": "proj6",
+      "title": "Code Efficiency",
+      "description": "Online Code Editor with real time analysis and optimization tool for measuring and improving code performance metrics",
+      "technologies": ["Python", "JavaScript", "TypeScript"],
+      "imageUrl": "/images/coding.jpg",
+      "liveUrl": "",
+      "repoUrl": "https://github.com/raghhavvvv/code_efficiency"
     }
   ],
   "experiences": [
